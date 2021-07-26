@@ -1,0 +1,44 @@
+<div class="card mt-3">
+    <div class="card-header" [ngStyle]="{'color':gradeColor[ti.grade]}">
+        <img src={{getImgUrl()}} class="img-thumbnail" style="max-height:44px"
+            alt="this is a thumbnail of the tradeitem" />
+        {{ti.name}}
+    </div>
+    <div class="card-body" *ngIf="gotdata">
+        <ul ngbNav #nav="ngbNav" [activeId]="route.fragment | async" class="nav-tabs">
+            <li [ngbNavItem]="'minprice'">
+                <a ngbNavLink routerLink="." [fragment]="'minprice'">Min Price</a>
+                <ng-template ngbNavContent>
+                    <app-chart [tradeTime]="tradeShowRecords.times" [chartName]="'MinPrice'"
+                        [tradeData]="tradeShowRecords.minPrices">
+                    </app-chart>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="'instock'">
+                <a ngbNavLink routerLink="." [fragment]="'instock'">In Stock</a>
+                <ng-template ngbNavContent>
+                    <app-chart [tradeTime]="tradeShowRecords.times" [chartName]="'InStock'"
+                        [tradeData]="tradeShowRecords.sumCounts">
+                    </app-chart>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="'volume'">
+                <a ngbNavLink routerLink="." [fragment]="'volume'">Volume</a>
+                <ng-template ngbNavContent>
+                    <app-chart [tradeTime]="tradeShowRecords.times.slice(1)" [chartName]="'Volume'"
+                        [tradeData]="tradeVolumeReocrds">
+                    </app-chart>
+                </ng-template>
+            </li>
+            <li [ngbNavItem]="'sold'">
+                <a ngbNavLink routerLink="." [fragment]="'sold'">Total Sold</a>
+                <ng-template ngbNavContent>
+                    <app-chart [tradeTime]="tradeShowRecords.times" [chartName]="'TotalSold'"
+                        [tradeData]="tradeShowRecords.totalSumCounts">
+                    </app-chart>
+                </ng-template>
+            </li>
+        </ul>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+</div>

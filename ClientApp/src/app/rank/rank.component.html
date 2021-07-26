@@ -1,0 +1,26 @@
+<table class="table table-hover">
+    <caption>Daily sell rank on yesterday</caption>
+    <thead>
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Item</th>
+            <th scope="col">Trade Volumes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let name of dailyShowRecord.names;index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                <p style="transform: rotate(0);">
+                    <img src={{getImgUrl(dailyShowRecord.mainKeys[i])}} class="img-thumbnail" style="max-height:44px"
+                        alt="this is a thumbnail of the tradeitem" />
+                    {{name}}
+                </p>
+            </td>
+            <td>
+                {{dailyShowRecord.tradingVolumes[i] | number: '2.'}}
+            </td>
+
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+        <label for="ItemName">Search by item name</label>
+        <input type="text" class="form-control" #ItemName (keyup.Enter)="search(ItemName.value)">
+    </div>
+</div>
+
+<div *ngIf="tradeItems.length>pageSize; else elsenopage">
+    <app-card *ngFor="let item of tradeItems | slice: (page-1) * pageSize : page * pageSize" [ti]="item"></app-card>
+
+    <div class="mt-3 d-flex justify-content-center align-items-center" style="max-width: 40rem;">
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="tradeItems.length" [maxSize]="7"
+            [boundaryLinks]="true">
+        </ngb-pagination>
+    </div>
+</div>
+
+<ng-template #elsenopage>
+    <app-card *ngFor="let item of tradeItems" [ti]="item"></app-card>
+</ng-template>
